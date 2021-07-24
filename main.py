@@ -14,7 +14,9 @@ def run_ISP_tester():
     """
     Running web scraper and speed test online 
     """
-
+    now = datetime.now() 
+    current_time = now.strftime("%H:%M:%S")
+    print("running ISP Test ", now)
     # current date and time
     now = datetime.now() 
     current_time = now.strftime("%H:%M:%S")
@@ -45,7 +47,7 @@ def run_ISP_tester():
     python_button.click()
 
     # wait for test to finish and generate results 
-    time.sleep(60)
+    time.sleep(70)
 
     print("done waiting")
 
@@ -69,14 +71,23 @@ def run_ISP_tester():
     my_gsheet1 = GSheet("ISP test results", "data")
     my_gsheet1.InsertRow(2, speed_test_data)
     
+    # clear speedtest data 
+    speed_test_data = ("","","","","","")
+    now = datetime.now() 
+    current_time = now.strftime("%H:%M:%S")
+    print("finished ISP Test ", now)
 """
    Schedule the job to be run
 """
-# run_ISP_tester()
-    
+#run_ISP_tester()
+
+#schedule.every(10).minutes.do(run_ISP_tester)
 schedule.every(5).minutes.do(run_ISP_tester)
 #schedule.every().day.at("19:51").do(run_ISP_tester)
+now = datetime.now() 
+current_time = now.strftime("%H:%M:%S")
+print("schedule started ", now)
 
 while True:
     schedule.run_pending()
-    time.sleep(10)
+    time.sleep(1)
