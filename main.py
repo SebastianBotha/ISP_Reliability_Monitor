@@ -10,6 +10,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
+
+#browser = webdriver.Chrome(executable_path = '/usr/lib/chromium-browser/chromedriver')
+#browser.get('https://automatetheboringstuff.com')
+
 def run_ISP_tester():
     """
     Running web scraper and speed test online 
@@ -23,7 +27,10 @@ def run_ISP_tester():
     current_date = now.strftime("%m/%d/%Y")
 
     # path to chrome driver: MACBOOK 
-    ChromDriver_path = "/Users/sebastianbotha/Python Projects/ChromeDriver/chromedriver"
+    ChromDriver_path = '/usr/lib/chromium-browser/chromedriver'
+    
+    #path to chrome driver: PI
+    
 
     # initiate a Chrome window using Chrome web driver 
     driver = webdriver.Chrome(ChromDriver_path)
@@ -76,13 +83,14 @@ def run_ISP_tester():
     now = datetime.now() 
     current_time = now.strftime("%H:%M:%S")
     print("finished ISP Test ", now)
+    
 """
    Schedule the job to be run
 """
 #run_ISP_tester()
 
-#schedule.every(10).minutes.do(run_ISP_tester)
-schedule.every(5).minutes.do(run_ISP_tester)
+schedule.every(60).minutes.do(run_ISP_tester)
+#schedule.every(1).minutes.do(run_ISP_tester)
 #schedule.every().day.at("19:51").do(run_ISP_tester)
 now = datetime.now() 
 current_time = now.strftime("%H:%M:%S")
